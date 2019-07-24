@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <title>Calculadora C³</title>
+
+    <!-- Required Stylesheets -->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"
+    />
+
+    <!-- Load polyfills to support older browsers -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver"></script>
+
+    <!-- Required scripts -->
+    <script src="https://unpkg.com/vue@latest/dist/vue.js"></script>
+    <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+
+    <style type="text/css">
+      @media print {
+        .form-web {
+          display: none;
+        }
+        .budget-printed{
+          display: inherit;
+        }
+      }
+
+       @media screen {
+        .form-web {
+          display: inherit;
+        }
+        .budget-printed{
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Our application root element -->
+    <div id="app">
+      <b-container class="form-web">
+        <b-row class="justify-content-md-center">
+          <b-col col md="9" sm="12">
+            <h1>
+              Calculadora C³
+            </h1>
+
+
+            <b-form>
+              <b-form-group
+                id="input-group-0"
+                label="ID cotizacion"
+                label-for="input-0"
+              >
+                <b-form-input
+                  id="input-0"
+                  v-model="client.profile.name"
+                  required
+                  placeholder="Brinca"
+                ></b-form-input>
+              </b-form-group>
+
+              <b-form-group
+                id="input-group-1"
+                label="Cliente"
+                label-for="input-1"
+              >
+                <b-form-input
+                  id="input-1"
+                  v-model="client.profile.name"
+                  required
+                  placeholder="Brinca"
+                ></b-form-input>
+              </b-form-group>
+
+              <b-form-group
+                id="input-group-2"
+                label="Fecha"
+                label-for="input-2"
+              >
+                <b-form-input
+                  id="input-2"
+                  v-model="client.profile.date"
+                  type="date"
+                  required
+                ></b-form-input>
+              </b-form-group>
+
+              <b-form-group
+                id="input-group-3"
+                label="Overhead"
+                label-for="input-3"
+              >
+                <b-input-group append="CLP">
+                  <b-form-input
+                    id="input-3"
+                    v-model="client.pricing.overhead"
+                    type="number"
+                    min="0"
+                    required
+                  ></b-form-input>
+                </b-input-group>
+              </b-form-group>
+
+               <b-form-group
+                id="input-group-4"
+                label="Número de colaboradores"
+                label-for="input-4"
+              >
+                <b-form-input
+                  id="input-4"
+                  v-model="client.pricing.collaborators"
+                  type="number"
+                  min="0"
+                  required
+                ></b-form-input>
+              </b-form-group>
+
+               <b-form-group
+                id="output-group-1"
+                label="Precio aplicación encuesta"
+                label-for="output-1"
+              >
+                <p id="output-1">
+                  {{ Math.round(price_survey_total).toLocaleString() }} CLP 
+                </p>
+              </b-form-group>
+
+               <b-form-group
+                id="input-group-5"
+                label="Reportes solicitados"
+                label-for="input-5"
+              >
+                <b-form-input
+                  id="input-5"
+                  v-model="client.pricing.requested_reports"
+                  type="number"
+                  min="0"
+                  required
+                ></b-form-input>
+              </b-form-group>
+
+               <b-form-group
+                id="output-group-2"
+                label="Subtotal"
+                label-for="output-2"
+              >
+                <p id="output-2">
+                  {{ Math.round(subtotal).toLocaleString() }} CLP
+                </p>
+              </b-form-group>
+
+               <b-form-group
+                id="input-group-6"
+                label="Descuento"
+                label-for="input-6"
+              >
+                <b-form-input
+                  id="input-6"
+                  v-model="client.pricing.discount"
+                  type="number"
+                  min="0"
+                  max="50"
+                  required
+                ></b-form-input>
+              </b-form-group>
+
+               <b-form-group
+                id="output-group-3"
+                label="Total"
+                label-for="output-3"
+              >
+                <p id="output-3">
+                  {{ Math.round(total).toLocaleString() }} CLP
+                </p>
+                <p id="output-3">
+                  {{ Math.round(total_uf).toLocaleString() }} UF
+                </p>
+              </b-form-group>
+
+            </b-form>
+          </b-col>
+        </b-row>
+      </b-container>
+
+      <div class="budget-printed">
+        <h1>
+          Hola mundo!
+        </h1>
+      </div>
+    </div>
+  </body>
+
+  <footer>
+    <script type="text/javascript">
+      window.app = new Vue({
+        el: '#app',
+        data: {
+          surveygizmo: {
+            anual: 4000
+          },
+          client: {
+            profile:{
+              name: "",
+              date: null,
+              email: "",
+            },
+            pricing:{
+              overhead: 100,
+              collaborators: 2800,
+              requested_reports: 1,
+              discount: 30,
+            }
+          },
+          base: {
+            report: 3500000,
+            base_partners: 999,
+          },
+          finance: {
+            usd_to_clp: {
+              date: "",
+              value: 690.805
+            },
+            uf_to_clp:  {
+              date: "",
+              value: 27953.42
+            }
+          }
+        },
+        created(){
+          fetch("https://mindicador.cl/api/dolar")
+            .then(response => (response.json()))
+            .then(result => { 
+              this.finance.usd_to_clp.date = result.serie[0].fecha
+              this.finance.usd_to_clp.value = result.serie[0].valor
+            });
+
+          fetch("https://mindicador.cl/api/uf")
+            .then(response => (response.json()))
+            .then(result => { 
+              this.finance.uf_to_clp.date = result.serie[0].fecha
+              this.finance.uf_to_clp.value = result.serie[0].valor
+            });
+        },
+        computed: {
+          surveygizmo_unit_price() { return ((this.surveygizmo.anual/12)/10000) },
+          surveyunit_price() { return (this.surveygizmo_unit_price * this.finance.usd_to_clp.value) * this.client.pricing.overhead  },
+          collaborators_delta() { 
+            var delta =  this.client.pricing.collaborators - this.base.base_partners
+            return (delta > 0 ? delta : 0)
+          },
+          price_survey_total() { return this.collaborators_delta * this.surveyunit_price },
+          subtotal() { return this.client.pricing.requested_reports * ( this.base.report + this.price_survey_total) },
+          total() { return ((100-this.client.pricing.discount)/100) * this.subtotal },
+          total_uf() { return this.total/this.finance.uf_to_clp.value }
+        },
+      })
+
+    </script>
+  </footer>
+</html>
