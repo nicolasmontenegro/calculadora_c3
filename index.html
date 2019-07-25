@@ -19,6 +19,8 @@
       rel="stylesheet"
       href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"
     />
+    <link href="https://fonts.googleapis.com/css?family=Passion+One&display=swap" rel="stylesheet">
+
 
     <!-- Load polyfills to support older browsers -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver"></script>
@@ -36,9 +38,17 @@
           display: inherit;
           -webkit-print-color-adjust: exact;
           color-adjust: exact;
+          width: 100%;
         }
+
+
         table td.highlighted{
-          background-color: #f2f2f2 !important;
+          background-color: #5d53b9 !important;
+          color: white;
+        }
+        table td.highlighted.light{
+          background-color: #d9d2e9 !important;
+          color: black;
         }
 
         table .no-align{
@@ -54,6 +64,10 @@
           display: none;
         }
       }
+      .title-c3{
+        font-family: 'Passion One', cursive;
+        color: #5d53b9;
+      }
 
 
     </style>
@@ -64,7 +78,7 @@
       <b-container class="form-web">
         <b-row class="justify-content-md-center">
           <b-col col md="9" sm="12">
-            <h1 class="mt-3 display-4">
+            <h1 class="mt-3 display-4 title-c3">
               Calculadora C³
             </h1>
 
@@ -301,17 +315,9 @@
       <div class="budget-printed">
           
         <b-row class="header mb-5">
-          <b-col col lg="6">
-            <p style="font-size: 80%; line-height: 120%;">
-              Andrés de Fuenzalida 17, Of. 63<br>
-              Providencia, Santiago<br>
-              Teléfono: +56 9 7519 3477<br>
-              Correo electrónico: hola@brinca.global<br>
-              Web: www.brinca.global
-            </p>
-          </b-col>
-          <b-col col lg="6" class="text-right">
-            <h1 class="mt-0 mb-0">
+          <b-col md="8">
+            <img src="./Diagnostico-c3.png" style="width: 300px;">
+            <h1 class="mt-0 mb-0 title-c3">
               Cotización
             </h1>
             <p class="mt-0 mb-0">
@@ -325,6 +331,16 @@
                 N° de cotización:
               </strong>
               {{ client.profile.id }}
+            </p>
+          </b-col>
+
+          <b-col md="4">
+            <p style="font-size: 90%; line-height: 135%;">
+              Andrés de Fuenzalida 17, Of. 63<br>
+              Providencia, Santiago<br>
+              Teléfono: +56 9 7519 3477<br>
+              Correo electrónico: hola@brinca.global<br>
+              Web: www.brinca.global
             </p>
           </b-col>
         </b-row>
@@ -367,7 +383,9 @@
                 <tr>
                   <td>
                     <p>
-                      Servicio: Diagnóstico Full C³
+                      <strong>
+                        Servicio: Diagnóstico Full C³
+                      </strong>
                     </p>
                     <p>
                       1. Aplicación Encuesta C³ a toda la empresa. con los siguientes indicadores:<br>
@@ -411,10 +429,10 @@
 
         <b-row class="budged-details mb-5">
           <b-col col lg="12">
-            <table class="table table-bordered" style="width: 30%;">
+            <table class="table table-bordered" style="width: 50%;">
               <tbody>
                 <tr>
-                  <td class="highlighted">
+                  <td class="highlighted light text-right">
                     Subtotal
                   </td>
                   <td class="text-right">
@@ -422,7 +440,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td class="highlighted">
+                  <td class="highlighted light text-right">
                     IVA
                   </td>
                   <td class="text-right">
@@ -430,7 +448,7 @@
                   </td>
                 </tr>
                 <tr v-if="client.pricing.discount != 0">
-                  <td class="highlighted">
+                  <td class="highlighted light text-right">
                     Descuentos
                   </td>
                   <td class="text-right">
@@ -438,7 +456,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td class="highlighted">
+                  <td class="highlighted light text-right">
                     <strong>
                       Total
                     </strong>
@@ -458,16 +476,20 @@
         <b-row class="small-letter mb-5">
           <b-col col lg="12">
             <p>
-              Condiciones:
+              <strong>
+                Condiciones:
+              </strong>
             </p>
-            <p>
-              <ul>
-                <li>Cotización válida por 30 días.</li>
-                <li>Cualquier modificación requiere realizar nueva cotización.</li>
-                <li>Forma de pago: 2 facturas al inicio de cada medición. Pago a 30 días contra factura </li>
-                <li>Medio de pago: Transferencia electrónica o depósito en cuenta corriente.</li>
-              </ol>
-            </p>
+            <i>
+              <p>
+                <ul>
+                  <li>Cotización válida por 30 días.</li>
+                  <li>Cualquier modificación requiere realizar nueva cotización.</li>
+                  <li>Forma de pago: 2 facturas al inicio de cada medición. Pago a 30 días contra factura </li>
+                  <li>Medio de pago: Transferencia electrónica o depósito en cuenta corriente.</li>
+                </ol>
+              </p>
+            </i>
           </b-col>
         </b-row>
       </div>
