@@ -45,6 +45,19 @@
           display: none;
         }
       }
+
+      table td{
+        border-width: 1px; 
+        border-color: rgb(166, 166, 166);
+        border-style: solid;
+        display: table-cell
+
+      }
+
+      table td.highlighted{
+        background-color: rgb(242, 242, 242);
+      }
+
     </style>
   </head>
   <body>
@@ -53,7 +66,7 @@
       <b-container class="form-web">
         <b-row class="justify-content-md-center">
           <b-col col md="9" sm="12">
-            <h1>
+            <h1 class="mt-2">
               Calculadora C³
             </h1>
 
@@ -66,7 +79,9 @@
               >
                 <b-form-input
                   id="input-0"
-                  v-model="client.profile.name"
+                  v-model="client.profile.id"
+                  type="number"
+                  min="0"
                   required
                   placeholder="Brinca"
                 ></b-form-input>
@@ -196,9 +211,172 @@
       </b-container>
 
       <div class="budget-printed">
-        <h1>
-          Hola mundo!
-        </h1>
+          
+        <b-row class="header mb-5">
+          <b-col col lg="6">
+            <small>
+              Andrés de Fuenzalida 17, Of. 63<br>
+              Providencia, Santiago<br>
+              Teléfono: +56 9 7519 3477<br>
+              Correo electrónico: jose.morales@brinca.global<br>
+              Web: www.brinca.global<br>
+            </small>
+          </b-col>
+          <b-col col lg="6" class="text-right">
+            <h1>
+              Cotización
+            </h1>
+            <p>
+              {{ client.profile.date }}
+            </p>
+          </b-col>
+        </b-row>
+
+
+        <b-row class="details-client mb-5">
+          <b-col lg="6">
+            <p>
+              <strong>
+                Cliente
+              </strong>
+              {{ client.profile.name }}
+            </p>
+          </b-col>
+          <b-col lg="6">
+            <p>
+              <strong>
+                Atención
+              </strong>
+              {{ client.profile.email }}
+            </p>
+          </b-col>
+          <b-col lg="6">
+            <p>
+              <strong>
+                N° de cotización
+              </strong>
+              {{ client.profile.id }}
+            </p>
+          </b-col>
+        </b-row>
+
+
+        <b-row class="budged-details mb-5">
+          <b-col col lg="12">
+            <table style="width: 100%;">
+
+              <tbody>
+                <tr class="text-center">
+                  <td class="highlighted">
+                    Descripción Servicios
+                  </td>
+                  <td class="highlighted">
+                    Total
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>
+                      Servicio: Diagnóstico Full C³
+                    </p>
+                    <p>
+                      1. Aplicación Encuesta C³ a toda la empresa. con los siguientes indicadores:<br>
+                      1.1. Cultura<br>
+                      1.2. Procesos<br>
+                      1.3. Estrategia<br>
+                      1.4. Resultados<br>
+                    </p>
+                    <p>
+                      2. Desagregación de resultados en los siguientes niveles:<br>
+                      2.1. Indicadores comparados en relación al benchmark vigente (nacional y por industria)<br>
+                      2.2. Indicadores de cultura desagregados por empresa, áreas y cargos<br>
+                      2.3. Compendio ítems de cultura<br>
+                      2.4. Selección de comentarios preguntas abiertas<br>
+                    </p>
+                    <p>
+                      3. Productos Entregables:<br>
+                      - Informe de resultados<br>
+                      - Consolidado respuestas abiertas<br>
+                      - Presentación de resultados<br>
+                      - Participación Ranking Creatividad e Innovación 2020<br>
+                      - Participación Círculo de Culturas Creativas<br>
+                    </p>
+                  </td>
+                  <td class="text-center">
+                    ${{ Math.round(subtotal).toLocaleString() }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+
+
+
+
+
+            </table>
+          </b-col>
+        </b-row>
+
+
+        <b-row class="budged-details mb-5">
+          <b-col col lg="12">
+            <table style="width: 30%;">
+              <tbody>
+                <tr>
+                  <td class="highlighted">
+                    Subtotal
+                  </td>
+                  <td>
+                    ${{ Math.round(subtotal).toLocaleString() }}
+                  </td>
+                </tr>
+                <tr>
+                  <td class="highlighted">
+                    IVA:
+                  </td>
+                  <td>
+                    Exento
+                  </td>
+                </tr>
+                <tr>
+                  <td class="highlighted">
+                    TOTAL:
+                  </td>
+                  <td>
+                    ${{ Math.round(total).toLocaleString() }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </b-col>
+        </b-row>
+
+
+        <b-row class="small-letter mb-5">
+          <b-col col lg="12">
+            <p>
+              Condiciones:
+            </p>
+            <p>
+              <ul>
+                <li>Cotización válida por 30 días.</li>
+                <li>Cualquier modificación requiere realizar nueva cotización.</li>
+                <li>Forma de pago: 2 facturas al inicio de cada medición. Pago a 30 días contra factura </li>
+                <li>Medio de pago: Transferencia electrónica o depósito en cuenta corriente.</li>
+              </ol>
+              
+            </p>
+          </b-col>
+
+
+
+        </b-row>
+
+
+
+
       </div>
     </div>
   </body>
@@ -213,6 +391,7 @@
           },
           client: {
             profile:{
+              id: 0,
               name: "",
               date: null,
               email: "",
