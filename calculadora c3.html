@@ -34,6 +34,15 @@
         }
         .budget-printed{
           display: inherit;
+          -webkit-print-color-adjust: exact;
+          color-adjust: exact;
+        }
+        table td.highlighted{
+          background-color: #f2f2f2 !important;
+        }
+
+        table .no-align{
+          vertical-align: inherit;
         }
       }
 
@@ -46,17 +55,6 @@
         }
       }
 
-      table td{
-        border-width: 1px; 
-        border-color: rgb(166, 166, 166);
-        border-style: solid;
-        display: table-cell
-
-      }
-
-      table td.highlighted{
-        background-color: rgb(242, 242, 242);
-      }
 
     </style>
   </head>
@@ -263,7 +261,7 @@
 
         <b-row class="budged-details mb-5">
           <b-col col lg="12">
-            <table style="width: 100%;">
+            <table class="table table-bordered" style="width: 100%;">
 
               <tbody>
                 <tr class="text-center">
@@ -303,7 +301,7 @@
                       - Participación Círculo de Culturas Creativas<br>
                     </p>
                   </td>
-                  <td class="text-center">
+                  <td class="text-center no-align">
                     ${{ Math.round(subtotal).toLocaleString() }}
                   </td>
                 </tr>
@@ -322,7 +320,7 @@
 
         <b-row class="budged-details mb-5">
           <b-col col lg="12">
-            <table style="width: 30%;">
+            <table class="table table-bordered" style="width: 30%;">
               <tbody>
                 <tr>
                   <td class="highlighted">
