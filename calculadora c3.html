@@ -64,144 +64,241 @@
       <b-container class="form-web">
         <b-row class="justify-content-md-center">
           <b-col col md="9" sm="12">
-            <h1 class="mt-2">
+            <h1 class="mt-3 display-1">
               Calculadora C³
             </h1>
 
 
-            <b-form>
-              <b-form-group
-                id="input-group-0"
-                label="ID cotizacion"
-                label-for="input-0"
-              >
-                <b-form-input
-                  id="input-0"
-                  v-model="client.profile.id"
-                  type="number"
-                  min="0"
-                  required
-                  placeholder="Brinca"
-                ></b-form-input>
-              </b-form-group>
+            <b-form @submit="printThis">
 
-              <b-form-group
-                id="input-group-1"
-                label="Cliente"
-                label-for="input-1"
-              >
-                <b-form-input
-                  id="input-1"
-                  v-model="client.profile.name"
-                  required
-                  placeholder="Brinca"
-                ></b-form-input>
-              </b-form-group>
+              <b-row class="mb-4">
+                <b-col md="12">
+                  <h2>
+                    Datos de la cotización
+                  </h2>        
+                </b-col>
 
-              <b-form-group
-                id="input-group-2"
-                label="Fecha"
-                label-for="input-2"
-              >
-                <b-form-input
-                  id="input-2"
-                  v-model="client.profile.date"
-                  type="date"
-                  required
-                ></b-form-input>
-              </b-form-group>
+                <b-col md="6">
 
-              <b-form-group
-                id="input-group-3"
-                label="Overhead"
-                label-for="input-3"
-              >
-                <b-input-group append="CLP">
-                  <b-form-input
-                    id="input-3"
-                    v-model="client.pricing.overhead"
-                    type="number"
-                    min="0"
-                    required
-                  ></b-form-input>
-                </b-input-group>
-              </b-form-group>
+                  <b-form-group
+                    id="input-group-id"
+                    label="ID cotizacion"
+                    label-for="input-id"
+                  >
+                    <b-form-input
+                      id="input-id"
+                      v-model="client.profile.id"
+                      type="number"
+                      min="0"
+                      required
+                      placeholder="Brinca"
+                    ></b-form-input>
+                  </b-form-group>
+                </b-col>
 
-               <b-form-group
-                id="input-group-4"
-                label="Número de colaboradores"
-                label-for="input-4"
-              >
-                <b-form-input
-                  id="input-4"
-                  v-model="client.pricing.collaborators"
-                  type="number"
-                  min="0"
-                  required
-                ></b-form-input>
-              </b-form-group>
 
-               <b-form-group
-                id="output-group-1"
-                label="Precio aplicación encuesta"
-                label-for="output-1"
-              >
-                <p id="output-1">
-                  {{ Math.round(price_survey_total).toLocaleString() }} CLP 
-                </p>
-              </b-form-group>
+                <b-col md="6">
 
-               <b-form-group
-                id="input-group-5"
-                label="Reportes solicitados"
-                label-for="input-5"
-              >
-                <b-form-input
-                  id="input-5"
-                  v-model="client.pricing.requested_reports"
-                  type="number"
-                  min="0"
-                  required
-                ></b-form-input>
-              </b-form-group>
+                  <b-form-group
+                    id="input-group-date"
+                    class="md-6"
+                    label="Fecha"
+                    label-for="input-date"
+                  >
+                    <b-form-input
+                      id="input-date"
+                      v-model="client.profile.date"
+                      type="date"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+                </b-col>
+              </b-row>
 
-               <b-form-group
-                id="output-group-2"
-                label="Subtotal"
-                label-for="output-2"
-              >
-                <p id="output-2">
-                  {{ Math.round(subtotal).toLocaleString() }} CLP
-                </p>
-              </b-form-group>
 
-               <b-form-group
-                id="input-group-6"
-                label="Descuento"
-                label-for="input-6"
-              >
-                <b-form-input
-                  id="input-6"
-                  v-model="client.pricing.discount"
-                  type="number"
-                  min="0"
-                  max="50"
-                  required
-                ></b-form-input>
-              </b-form-group>
 
-               <b-form-group
-                id="output-group-3"
-                label="Total"
-                label-for="output-3"
-              >
-                <p id="output-3">
-                  {{ Math.round(total).toLocaleString() }} CLP
-                </p>
-                <p id="output-3">
-                  {{ Math.round(total_uf).toLocaleString() }} UF
-                </p>
-              </b-form-group>
+              <b-row class="mb-4">
+                <b-col col md="12">
+                  <h2>
+                    Datos del cliente
+                  </h2>
+                </b-col>
+
+
+                <b-col md="12">
+                  <b-form-group
+                    id="input-group-profile-name"
+                    label="Cliente"
+                    label-for="input-profile-name"
+                  >
+                    <b-form-input
+                      id="input-profile-name"
+                      v-model="client.profile.name"
+                      required
+                      placeholder="Brinca"
+                    ></b-form-input>
+                  </b-form-group>
+                </b-col>
+
+ 
+
+                <b-col md="6">
+                  <b-form-group
+                    id="input-group-profile-email"
+                    label="Correo electrónico"
+                    label-for="input-profile-email"
+                  >
+                    <b-form-input
+                      id="input-profile-email"
+                      v-model="client.profile.email"
+                      type="email"
+                      required
+                      placeholder="correo@empresa.com"
+                    ></b-form-input>
+                  </b-form-group>
+                </b-col>
+
+                <b-col md="6">
+                  <b-form-group
+                    id="input-group-profile-agent"
+                    label="Representante"
+                    label-for="input-profile-agent"
+                  >
+                    <b-form-input
+                      id="input-profile-agent"
+                      v-model="client.profile.agent"
+                      required
+                      placeholder="Juan Perez"
+                    ></b-form-input>
+                  </b-form-group>
+                </b-col>
+
+              </b-row>
+
+
+              <b-row class="mb-4">
+                <b-col col md="12">
+                  <h2>
+                    Cotización
+                  </h2>
+                </b-col>
+
+                <b-col md="6">
+                  <b-form-group
+                    id="input-group-pricing-overhead"
+                    label="Overhead"
+                    label-for="input-pricing-overhead"
+                  >
+                    <b-input-group append="CLP">
+                      <b-form-input
+                        id="input-pricing-overhead"
+                        v-model="client.pricing.overhead"
+                        type="number"
+                        min="0"
+                        required
+                      ></b-form-input>
+                    </b-input-group>
+                  </b-form-group>
+
+                </b-col>
+                <b-col md="6">
+                  <b-form-group
+                    id="input-group-pricing-collaborators"
+                    label="Número de colaboradores"
+                    label-for="input-pricing-collaborators"
+                  >
+                    <b-form-input
+                      id="input-pricing-collaborators"
+                      v-model="client.pricing.collaborators"
+                      type="number"
+                      min="0"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+                </b-col>
+                <b-col md="12">
+                  <b-form-group
+                    id="output-group-price-survey-total"
+                    label="Precio aplicación encuesta"
+                    label-for="output-price-survey-total"
+                  >
+                    <p id="output-price-survey-total">
+                      {{ Math.round(price_survey_total).toLocaleString() }} CLP 
+                    </p>
+                  </b-form-group>
+                </b-col>
+                <b-col md="12">
+                  <b-form-group
+                    id="input-group-pricing-requested-reports"
+                    label="Reportes solicitados"
+                    label-for="input-pricing-requested-reports"
+                  >
+                    <b-form-input
+                      id="input-pricing-requested-reports"
+                      v-model="client.pricing.requested_reports"
+                      type="number"
+                      min="0"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+                </b-col>
+                <b-col md="12">
+                  <b-form-group
+                    id="output-group-subtotal"
+                    label="Subtotal"
+                    label-for="output-subtotal"
+                  >
+                    <p id="output-subtotal">
+                      {{ Math.round(subtotal).toLocaleString() }} CLP
+                    </p>
+                  </b-form-group>
+                </b-col>
+                <b-col md="12">
+                  <b-form-group
+                    id="input-group-pricing-discount"
+                    label="Descuento"
+                    label-for="input-pricing-discount"
+                  >
+                    <b-form-input
+                      id="input-pricing-discount"
+                      v-model="client.pricing.discount"
+                      type="number"
+                      min="0"
+                      max="50"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+                </b-col>
+                <b-col md="12">
+                  <b-form-group
+                    id="output-group-total"
+                    label="Total"
+                    label-for="output-total"
+                  >
+                    <p id="output-total">
+                      {{ Math.round(total).toLocaleString() }} CLP / {{ Math.round(total_uf).toLocaleString() }} UF
+                    </p>
+                  </b-form-group>
+                </b-col>
+              </b-row>
+              <b-row class="mb-4">
+
+                <b-col md="4">
+                  <b-button block type="submit" variant="success">Imprimir</b-button>
+                </b-col>
+              </b-row>
+
+   
+
+               
+
+               
+
+               
+
+               
+
+               
 
             </b-form>
           </b-col>
@@ -212,16 +309,16 @@
           
         <b-row class="header mb-5">
           <b-col col lg="6">
-            <small>
+            <p style="font-size: 80%; line-height: 120%;">
               Andrés de Fuenzalida 17, Of. 63<br>
               Providencia, Santiago<br>
               Teléfono: +56 9 7519 3477<br>
-              Correo electrónico: jose.morales@brinca.global<br>
-              Web: www.brinca.global<br>
-            </small>
+              Correo electrónico: hola@brinca.global<br>
+              Web: www.brinca.global
+            </p>
           </b-col>
           <b-col col lg="6" class="text-right">
-            <h1>
+            <h1 class="mt-0">
               Cotización
             </h1>
             <p>
@@ -232,26 +329,26 @@
 
 
         <b-row class="details-client mb-5">
-          <b-col lg="6">
+          <b-col col sm="4">
             <p>
               <strong>
-                Cliente
+                Cliente:
               </strong>
               {{ client.profile.name }}
             </p>
           </b-col>
-          <b-col lg="6">
+          <b-col col sm="4">
             <p>
               <strong>
-                Atención
+                Atención:
               </strong>
-              {{ client.profile.email }}
+              {{ client.profile.agent }}
             </p>
           </b-col>
-          <b-col lg="6">
+          <b-col col sm="4">
             <p>
               <strong>
-                N° de cotización
+                N° de cotización:
               </strong>
               {{ client.profile.id }}
             </p>
@@ -298,7 +395,7 @@
                       - Consolidado respuestas abiertas<br>
                       - Presentación de resultados<br>
                       - Participación Ranking Creatividad e Innovación 2020<br>
-                      - Participación Círculo de Culturas Creativas<br>
+                      - Participación Círculo de Culturas Creativas
                     </p>
                   </td>
                   <td class="text-center no-align">
@@ -336,6 +433,14 @@
                   </td>
                   <td>
                     Exento
+                  </td>
+                </tr>
+                <tr v-if="client.pricing.discount != 0">
+                  <td class="highlighted">
+                    Descuentos:
+                  </td>
+                  <td>
+                    {{ client.pricing.discount }}%
                   </td>
                 </tr>
                 <tr>
@@ -393,6 +498,7 @@
               name: "",
               date: null,
               email: "",
+              agent: "",
             },
             pricing:{
               overhead: 100,
